@@ -395,7 +395,7 @@ local function route_to_deepweb(event)
 	local is_onion = to_host:find("%.onion$");
 	local is_i2p = to_host:find("%.i2p$");
 	
-	if not is_onion or is_i2p then
+	if not ( is_onion or is_i2p ) then
 	   if onion_map[to_host] then
 	      if type(onion_map[to_host]) == "string" then
 		 onion_host = onion_map[to_host];
@@ -435,10 +435,11 @@ local function route_to_deepweb(event)
 
 	hosts[event.from_host].s2sout[to_host] = host_session;
 	
-	if is_onion then
-	   connect_onion(host_session, onion_host or to_host, onion_port or 5269);
-	elseif is_i2p then
+	
+	if is_i2p then
 	   connect_i2p(host_session, i2p_host or to_host, i2p_port or 5269);
+	else
+	   connect_onion(host_session, onion_host or to_host, onion_port or 5269);
 	end
 	
 	return true;
@@ -450,9 +451,7 @@ module:hook("route/remote", route_to_deepweb, 200);
 
 module:hook_global("s2s-check-certificate", function (event)
 	local host = event.host;
-	if host and host:find("%.onion$") then
-	   return true;
-	elseif host and host:find("%.i2p$") then
+	if host and ( host:find("%.onion$") or host:find("%.i2p$") ) then
 	   return true;
 	end
 end);
