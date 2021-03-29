@@ -55,7 +55,7 @@ connect to a given host with the address of a hidden service. The
 configuration works as follows:
 
 ```
- onions_map = {
+ onion_map = {
         ["kalli.st"] = "kallist4mcluuxbjnr5p2asdlmdhaos3pcrvhk3fbzmiiiftwg6zncid.onion";
 }
 ```
@@ -64,7 +64,7 @@ or, to also specify a port:
 
 
 ```
- onions_map = {
+ onion_map = {
         ["kalli.st"] = { 
         	host = "kallist4mcluuxbjnr5p2asdlmdhaos3pcrvhk3fbzmiiiftwg6zncid.onion",  port= 5269
         };
