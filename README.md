@@ -1,4 +1,5 @@
-# mod_deepweb
+# mod_deepweb 
+Fork of [mod_onions](https://modules.prosody.im/mod_onions) that adds I2P support.
 
 ## Introduction
 
